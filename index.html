@@ -507,10 +507,10 @@ html{
     <div class="cards">
         <div class="card project-card">
             <h3>Hospital Management System</h3>
-            <p>A desktop application designed to streamline hospital operations, including patient registration, login authentication, and secure data entry.</p>
+            <p>Developed a system  to manage hospital operations, including patient registration, login authentication, and secure data entry.</p>
             <div class="project-tags">
                 <span class="tag">Java</span>
-                <span class="tag">Swing / AWT</span>
+                <span class="tag">Swing</span>
                 <span class="tag">MySQL</span>
             </div>
             <a href="https://github.com/devindibhagya" target="_blank" class="project-link">
@@ -570,20 +570,21 @@ html{
         </div>
 
         <div class="card">
-            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+            <!-- Formspree Endpoint සහ Input Names මෙතැනට සාර්ථකව ඇතුළත් කර ඇත -->
+            <form class="contact-form" id="my-form" action="https://formspree.io/f/mgojwddz" method="POST">
                 <div class="form-group">
                     <label for="name">Your Name</label>
-                    <input type="text" id="name" required placeholder="Enter your name">
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
                 </div>
                 <div class="form-group">
                     <label for="email">Your Email</label>
-                    <input type="email" id="email" required placeholder="Enter your email">
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" rows="5" required placeholder="Type your message here..."></textarea>
+                    <textarea id="message" name="message" rows="5" required placeholder="Type your message here..."></textarea>
                 </div>
-                <button type="submit" class="btn">Send Message</button>
+                <button type="submit" class="btn" id="submit-btn">Send Message</button>
             </form>
         </div>
     </div>
@@ -599,10 +600,36 @@ function toggleTheme(){
 }
 
 function handleFormSubmit(event) {
-    event.preventDefault();
+    event.preventDefault(); // පිටුව reload වීම වළක්වයි
+    
+    const form = event.target;
+    const submitBtn = document.getElementById("submit-btn");
     const name = document.getElementById('name').value;
-    alert(`Thank you, ${name}! Your message has been sent successfully.`);
-    event.target.reset();
+    
+    submitBtn.innerText = "Sending...";
+    submitBtn.disabled = true;
+
+    const data = new FormData(form);
+    
+    fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            alert(`Thank you, ${name}! Your message has been sent successfully straight to my email.`);
+            form.reset();
+        } else {
+            alert("Oops! There was a problem submitting your form.");
+        }
+    }).catch(error => {
+        alert("Oops! Connection error. Please try again.");
+    }).finally(() => {
+        submitBtn.innerText = "Send Message";
+        submitBtn.disabled = false;
+    });
 }
 </script>
 
