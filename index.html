@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bhagya Devindi | Portfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+:root{
+    --bg:#0b1220;
+    --card:rgba(255,255,255,0.06);
+    --glass:rgba(255,255,255,0.08);
+    --text:#e5e7eb;
+    --muted:#94a3b8;
+    --accent:#38bdf8;
+    --accent2:#0ea5e9;
+    --input-bg: rgba(255, 255, 255, 0.05);
+}
+
+.light{
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#1e293b;
+    --accent:#0ea5e9;
+    --input-bg: #f1f5f9;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    transition:.4s;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 10%;
+    position:fixed;
+    width:100%;
+    top:0;
+    background:rgba(0,0,0,.2);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.logo-box{
+    width:80px;
+    height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:linear-gradient(45deg,#38bdf8,#0ea5e9);
+    color:white;
+    font-weight:800;
+    position:relative;
+    transition:.4s;
+    box-shadow:0 0 15px rgba(56,189,248,0.4);
+}
+
+/* Glow animation */
+.logo-box::before{
+    content:'';
+    position:absolute;
+    inset:-4px;
+    border-radius:14px;
+    background:linear-gradient(45deg,#38bdf8,#0ea5e9,#38bdf8);
+    filter:blur(10px);
+    opacity:0.6;
+    z-index:-1;
+    animation:glow 3s infinite linear;
+}
+
+@keyframes glow{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+/* Hover effect */
+.logo:hover .logo-box{
+    transform:scale(1.1) rotate(-5deg);
+    box-shadow:0 0 25px rgba(56,189,248,0.7);
+}
+
+.logo-text{
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav ul li a{
+    color:var(--text);
+    text-decoration:none;
+}
+
+.theme-btn{
+    background:var(--accent);
+    border:none;
+    color:white;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+section{
+    padding:100px 10%;
+    animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+.hero h1{
+    font-size:60px;
+    animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.hero span{
+    color:var(--accent);
+}
+
+.hero p{
+    margin:20px auto;
+    max-width:700px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 28px;
+    background:linear-gradient(45deg,var(--accent),var(--accent2));
+    color:white;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+    box-shadow:0 10px 25px rgba(56,189,248,0.25);
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 15px 35px rgba(56,189,248,0.4);
+}
+
+.title{
+    text-align:center;
+    margin-bottom:50px;
+    color:var(--accent);
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding:25px;
+    border-radius:16px;
+    transition:.3s;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:var(--accent);
+}
+
+/* Project Styling */
+.project-card h3 {
+    margin-bottom: 10px;
+}
+.project-tags {
+    margin: 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tag {
+    font-size: 12px;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.project-link:hover {
+    color: var(--accent2);
+    text-decoration: underline;
+}
+
+.skills{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.skill{
+    background:var(--card);
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+
+/* Contact Section */
+.contact-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    align-items: start;
+}
+
+.contact-info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-info .card{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Social Icons Style */
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--input-bg);
+    color: var(--text);
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.light .social-icon {
+    border: 1px solid #cbd5e1;
+}
+
+.social-icon:hover {
+    color: white;
+    transform: translateY(-5px);
+}
+
+.social-icon.linkedin:hover {
+    background: #0077b5;
+    border-color: #0077b5;
+    box-shadow: 0 5px 15px rgba(0, 119, 181, 0.4);
+}
+
+.social-icon.github:hover {
+    background: #333;
+    border-color: #333;
+    box-shadow: 0 5px 15px rgba(51, 51, 51, 0.4);
+}
+
+.light .social-icon.github:hover {
+    background: #000;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: var(--input-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.light .form-group input, .light .form-group textarea {
+    border: 1px solid #cbd5e1;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(56,189,248,0.2);
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    background:var(--card);
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.hero-content{
+    flex:1;
+    min-width:300px;
+}
+
+.hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.hero-image img{
+    width:350px;
+    height:350px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid var(--accent);
+    box-shadow:0 0 30px rgba(56,189,248,.4);
+}
+
+@media(max-width:768px){
+    .hero{
+        flex-direction:column-reverse;
+        text-align:center;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .hero-image img{
+        width:250px;
+    }
+}
+
+html{
+    scroll-behavior:smooth;
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">
+        <span class="logo-box">BHAGYA</span>
+    </div>
+
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Hello, I'm <span>Bhagya Devindi</span></h1>
+        <h3>IT Student & Web Developer</h3>
+        <p>
+            Passionate IT student with knowledge in Web Development,
+            Database Management and UI Design. Seeking opportunities
+            to gain industry experience and build innovative solutions.
+        </p>
+        <a href="cv.pdf" class="btn" download>Download CV</a>
+    </div>
+
+    <div class="hero-image">
+        <img src="cv image.png" alt="Bhagya Devindi">
+    </div>
+</section>
+
+<section id="about">
+    <h2 class="title">About Me</h2>
+    <div class="card">
+        <p>
+            I am currently pursuing a Higher National Diploma in Information Technology
+            at SLIATE. I have practical knowledge in HTML, CSS, JavaScript, PHP,
+            Python and MySQL. My goal is to become a professional software developer
+            and contribute to innovative technology solutions.
+        </p>
+    </div>
+</section>
+
+<section id="education">
+    <h2 class="title">Education</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>HNDIT</h3>
+            <p>SLIATE - Dehiwala</p>
+            <p>2024 - Present</p>
+        </div>
+        <div class="card">
+            <h3>G.C.E A/L</h3>
+            <p>Weeraketiya Rajapaksha Central College</p>
+            <p>2022</p>
+        </div>
+        <div class="card">
+            <h3>G.C.E O/L</h3>
+            <p>H/Katuwana National School</p>
+            <p>2019</p>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <h2 class="title">Skills</h2>
+    <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">PHP</div>
+        <div class="skill">Python</div>
+        <div class="skill">MySQL</div>
+        <div class="skill">Figma</div>
+        <div class="skill">Team Work</div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+    <h2 class="title">Projects</h2>
+    <div class="cards">
+        <div class="card project-card">
+            <h3>Hospital Management System</h3>
+            <p>A desktop application designed to streamline hospital operations, including patient registration, login authentication, and secure data entry.</p>
+            <div class="project-tags">
+                <span class="tag">Java</span>
+                <span class="tag">Swing / AWT</span>
+                <span class="tag">MySQL</span>
+            </div>
+            <a href="https://github.com/devindibhagya" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> View Repository
+            </a>
+        </div>
+        
+        <div class="card project-card">
+            <h3>Green Coffee Website</h3>
+            <p>A fully responsive web platform built for a coffee business, featuring an interactive front-end design and a secure backend structure.</p>
+            <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">PHP</span>
+                <span class="tag">MYSQL</span>
+            </div>
+            <a href="https://github.com/devindibhagya" target="_blank" class="project-link">
+                <i class="fab fa-github"></i> View Repository
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="certificates">
+    <h2 class="title">Certificates</h2>
+    <div class="cards">
+        <div class="card">Diploma in English - 2023</div>
+        <div class="card">Introduction to Web Design & Development - 2024</div>
+        <div class="card">User Interface Design with Figma - 2025</div>
+        <div class="card">Web Design For Beginners - 2026</div>
+        <div class="card">HTML Essentials - 2026</div>
+        <div class="card">CSS Essentials - 2026</div>
+        <div class="card">JavaScript Essentials - 2026</div>
+    </div>
+</section>
+
+<section id="contact">
+    <h2 class="title">Contact Me</h2>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <div class="card">
+                <p>📧 bhagyadevi709@gmail.com</p>
+                <p>📱 +94 77 905 9132</p>
+                <p>📍 Katuwana, Sri Lanka</p>
+                
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/bhagya-devindi-7ab07433a/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BRnn2BfdUQnmuNP0935e%2BFw%3D%3D" target="_blank" class="social-icon linkedin" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/devindibhagya" target="_blank" class="social-icon github" title="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <form class="contact-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" required placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2026 Bhagya Devindi | Portfolio Website
+</footer>
+
+<script>
+function toggleTheme(){
+    document.body.classList.toggle('light');
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    alert(`Thank you, ${name}! Your message has been sent successfully.`);
+    event.target.reset();
+}
+</script>
+
+</body>
+</html>
